@@ -76,11 +76,19 @@ namespace UNiDAYS.Features
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Launch GalacticoEleven and create a new league")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void LaunchGalacticoElevenAndCreateANewLeague()
+        [NUnit.Framework.TestCaseAttribute("felroygalactico@yopmail.com", "Test@123", null)]
+        public virtual void LaunchGalacticoElevenAndCreateANewLeague(string username, string password, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "mytag"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("username", username);
+            argumentsOfScenario.Add("password", password);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Launch GalacticoEleven and create a new league", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
@@ -105,17 +113,8 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 testRunner.Given("I launch GalacticoEleven", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Key",
-                            "Value"});
-                table1.AddRow(new string[] {
-                            "username",
-                            "felroygalactico@yopmail.com"});
-                table1.AddRow(new string[] {
-                            "password",
-                            "Test@123"});
 #line 7
-testRunner.Given("Successfully log in using registered credentials", ((string)(null)), table1, "Given ");
+testRunner.And(string.Format("Successfully log in using {0} and {1}", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

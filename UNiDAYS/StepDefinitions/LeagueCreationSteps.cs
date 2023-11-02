@@ -31,23 +31,23 @@ namespace SpecflowSelenium.StepDefinitions
         }
 
         //Logging in
-        [Given(@"Successfully log in using registered credentials")]
-        public void Login(Table table)
+        [Given(@"Successfully log in using (.*) and (.*)")]
+        public void Login(string username, string password)
         {
             //Find and click the login feature on the homepage
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             IWebElement login = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@id=\"sidebar\"]/div/ul[3]/li/a")));
             if (login != null)
             {
-                //Find and input username and password onto the login form, then click on 'Login'
+                //Find and input username and password onto the login form, then click on 'Login' - Located using XPath(.//placeholder) to change things up
                 Assert.IsTrue(login.Text.ToLower().Contains("login"));
                 login.Click();
                 IWebElement emailField = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//input[@placeholder='Email']")));
                 IWebElement pwdField = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//input[@placeholder='Password']")));
 
-                var dictionary = TableExtensions.ToDictionary(table);
-                emailField.SendKeys(dictionary["username"]);
-                pwdField.SendKeys(dictionary["password"]);
+                //Input username and password from Feature file, then click on 'Login'
+                emailField.SendKeys(username);
+                pwdField.SendKeys(password);
                 IWebElement loginBtn = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"main\"]/div[1]/div/div/div/form/div[3]/button")));
                 loginBtn.Click();
             }
