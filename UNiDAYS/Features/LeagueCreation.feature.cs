@@ -116,6 +116,27 @@ testRunner.Given("I launch GalacticoEleven", ((string)(null)), ((TechTalk.SpecFl
 #line 7
 testRunner.And(string.Format("Successfully log in using {0} and {1}", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
+#line 8
+testRunner.When("I click on \'Create\' on the \'Leagues\' page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Key",
+                            "Value"});
+                table1.AddRow(new string[] {
+                            "name",
+                            "galactico"});
+                table1.AddRow(new string[] {
+                            "team",
+                            "UNiGal"});
+                table1.AddRow(new string[] {
+                            "competition",
+                            "EPL 2023/24"});
+#line 9
+testRunner.Then("I enter a \'Name\', \'Team\' and select a \'Competition\'", ((string)(null)), table1, "Then ");
+#line hidden
+#line 14
+testRunner.And("Verify successful creation of new league", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
             }
             this.ScenarioCleanup();
         }
