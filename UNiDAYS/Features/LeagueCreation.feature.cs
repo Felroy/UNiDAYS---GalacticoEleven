@@ -75,12 +75,12 @@ namespace UNiDAYS.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Launch GalacticoEleven and create a new league")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.CategoryAttribute("Scenario1")]
         [NUnit.Framework.TestCaseAttribute("felroygalactico@yopmail.com", "Test@123", null)]
         public virtual void LaunchGalacticoElevenAndCreateANewLeague(string username, string password, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "mytag"};
+                    "Scenario1"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -127,15 +127,68 @@ testRunner.When("I click on \'Create\' on the \'Leagues\' page", ((string)(null)
                             "galactico"});
                 table1.AddRow(new string[] {
                             "team",
-                            "UNiGal"});
-                table1.AddRow(new string[] {
-                            "competition",
-                            "EPL 2023/24"});
+                            "GalCo"});
 #line 9
 testRunner.Then("I enter a \'Name\', \'Team\' and select a \'Competition\'", ((string)(null)), table1, "Then ");
 #line hidden
-#line 14
+#line 13
 testRunner.And("Verify successful creation of new league", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Logout after League creation and trigger password recovery via email")]
+        [NUnit.Framework.CategoryAttribute("Scenario2")]
+        [NUnit.Framework.TestCaseAttribute("felroygalactico@yopmail.com", "Test@123", null)]
+        public virtual void LogoutAfterLeagueCreationAndTriggerPasswordRecoveryViaEmail(string username, string password, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Scenario2"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("username", username);
+            argumentsOfScenario.Add("password", password);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logout after League creation and trigger password recovery via email", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 20
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 21
+testRunner.Given("I log out", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 22
+testRunner.And("I click on \'Forgotten Password\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 23
+testRunner.When(string.Format("I enter my email address: {0}", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 24
+testRunner.And("I click on \'Reset Password\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 25
+testRunner.Then(string.Format("I should receive a password recovery email for {0}", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
