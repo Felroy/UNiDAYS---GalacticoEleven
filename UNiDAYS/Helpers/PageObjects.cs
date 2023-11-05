@@ -53,14 +53,28 @@ namespace SpecflowSelenium.Helpers
             return emailDomain.ToString();
         }
 
-        public static string parseTime(string n)
+        public static bool compareTime(string n)
         {
+            bool isTestValid = false;
+            n = n.Replace(",", "");
+            DateTime parsedDateTime = DateTime.ParseExact(n, "dddd MMMM dd yyyy hh:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime currentDateTime = DateTime.Now;
+            Console.WriteLine(currentDateTime);
+            Console.WriteLine(parsedDateTime + "-- Parsed date time");
             string[] nTime = n.Trim().Split(new string[] { "\r\n", "\r", "\n", " " }, StringSplitOptions.None);
-            Console.WriteLine(nTime);
-            int count = nTime.Count()-1;
-            string time = nTime[count]+nTime.Last();
-            Console.WriteLine(time);
-            return n;
+            int timeCount = nTime.Count()-2;
+            //string time = nTime[timeCount]+nTime.Last();
+            if ((currentDateTime - parsedDateTime).TotalMinutes < 2)
+            {
+                isTestValid = true;
+            }
+            else
+            {
+                isTestValid = false;
+            }
+            return isTestValid;
+            //Console.WriteLine(time);
+            //return parsedDateTime;
         }
     }
 

@@ -178,15 +178,14 @@ namespace SpecflowSelenium.StepDefinitions
                 emailField.SendKeys(username);
                 IWebElement loginBtn = driver.FindElement(By.XPath("//*[@id=\"refreshbut\"]/button"));
                 loginBtn.Click();
+                //switch iframe here
+                driver.SwitchTo().Frame(driver.FindElement(By.Name("ifmail")));
                 wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[3]/div[4]/span"))).Click();
                 IWebElement emailTime = driver.FindElement(By.XPath("/html/body/header/div[3]/div[4]/span"));
                 string latestEmailTime = emailTime.Text;
-                
-                PageObjects.parseTime(latestEmailTime); 
-                Console.Write(latestEmailTime);
-            }// /html/body/header/div[3]/div[4]/span
-            //  /html/body/header/div[3]/div[4]/span
-            // /html/body/header/div[3]/div[3]/span
+                //Call compareTime from PageObjects to parse and compare time passed between test and NOW
+                Assert.True(PageObjects.compareTime(latestEmailTime) == true);
+            }
         }
         public void Dispose()
         {
