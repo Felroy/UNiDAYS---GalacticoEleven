@@ -57,7 +57,8 @@ namespace SpecflowSelenium.Helpers
         {
             bool isTestValid = false;
             n = n.Replace(",", "");
-            DateTime parsedDateTime = DateTime.ParseExact(n, "dddd MMMM dd yyyy hh:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime parsedDateTime = DateTime.ParseExact(n, "dddd MMMM dd yyyy h:m:s tt", System.Globalization.CultureInfo.InvariantCulture);
+            //"dddd MMMM dd yyyy hh:mm:ss tt"
             DateTime currentDateTime = DateTime.Now;
             Console.WriteLine(currentDateTime);
             Console.WriteLine(parsedDateTime + "-- Parsed date time");

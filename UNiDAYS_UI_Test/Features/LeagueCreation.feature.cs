@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace UNiDAYS.Features
+namespace UNiDAYS_UI_Test.Features
 {
     using TechTalk.SpecFlow;
     using System;
@@ -140,12 +140,12 @@ testRunner.And("Verify successful creation of new league", ((string)(null)), ((T
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Logout after League creation and trigger password recovery via email")]
-        [NUnit.Framework.CategoryAttribute("Scenario2")]
+        [NUnit.Framework.CategoryAttribute("BonusTestScenario")]
         [NUnit.Framework.TestCaseAttribute("felroygalactico@yopmail.com", "Test@123", null)]
         public virtual void LogoutAfterLeagueCreationAndTriggerPasswordRecoveryViaEmail(string username, string password, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "Scenario2"};
+                    "BonusTestScenario"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));

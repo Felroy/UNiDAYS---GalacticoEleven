@@ -16,7 +16,7 @@ Examples:
 | username                    | password |
 | felroygalactico@yopmail.com | Test@123 |
 
-@Scenario2
+@BonusTestScenario
 Scenario: Logout after League creation and trigger password recovery via email
 Given I log out
 And I click on 'Forgotten Password'

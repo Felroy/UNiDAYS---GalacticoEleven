@@ -15,7 +15,7 @@ namespace SpecflowSelenium.StepDefinitions
     public class GalacticoTest : IDisposable
     {   
         //Initialize Chromedriver
-        public static ChromeDriver driver = new ChromeDriver(@"X:\Visual Studio\UNiDAYS\UNiDAYS\Drivers\chromedriver.exe");
+        public static ChromeDriver driver = new ChromeDriver(@"X:\Visual Studio\UNiDAYS\UNiDAYS_UI_Test\Drivers\chromedriver.exe");
 
         public static PageObjects.storeLeagueDetails leagueDetails = new PageObjects.storeLeagueDetails();
 
@@ -182,9 +182,10 @@ namespace SpecflowSelenium.StepDefinitions
                 driver.SwitchTo().Frame(driver.FindElement(By.Name("ifmail")));
                 wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[3]/div[4]/span"))).Click();
                 IWebElement emailTime = driver.FindElement(By.XPath("/html/body/header/div[3]/div[4]/span"));
-                string latestEmailTime = emailTime.Text;
+                Thread.Sleep(7000); //Giving Yopmail time to receive the email
                 //Call compareTime from PageObjects to parse and compare time passed between test and NOW
-                Assert.True(PageObjects.compareTime(latestEmailTime) == true);
+                Assert.True(PageObjects.compareTime(emailTime.Text) == true);
+                Console.WriteLine(PageObjects.compareTime(emailTime.Text) == true);
             }
         }
         public void Dispose()
