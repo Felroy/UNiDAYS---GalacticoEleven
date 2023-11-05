@@ -176,13 +176,15 @@ namespace SpecflowSelenium.StepDefinitions
                 wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("accept"))).Click();
                 IWebElement emailField = driver.FindElement(By.Id("login"));
                 emailField.SendKeys(username);
+                //Thread.Sleep to give yopmail some time to receive email
+                Thread.Sleep(7000);
                 IWebElement loginBtn = driver.FindElement(By.XPath("//*[@id=\"refreshbut\"]/button"));
                 loginBtn.Click();
                 //switch iframe here
                 driver.SwitchTo().Frame(driver.FindElement(By.Name("ifmail")));
                 wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[3]/div[4]/span"))).Click();
                 IWebElement emailTime = driver.FindElement(By.XPath("/html/body/header/div[3]/div[4]/span"));
-                Thread.Sleep(7000); //Giving Yopmail time to receive the email
+                string latestEmailTime = emailTime.Text;
                 //Call compareTime from PageObjects to parse and compare time passed between test and NOW
                 Assert.True(PageObjects.compareTime(emailTime.Text) == true);
                 Console.WriteLine(PageObjects.compareTime(emailTime.Text) == true);

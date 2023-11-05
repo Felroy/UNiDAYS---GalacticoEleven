@@ -60,8 +60,7 @@ namespace SpecflowSelenium.Helpers
             DateTime parsedDateTime = DateTime.ParseExact(n, "dddd MMMM dd yyyy h:m:s tt", System.Globalization.CultureInfo.InvariantCulture);
             //"dddd MMMM dd yyyy hh:mm:ss tt"
             DateTime currentDateTime = DateTime.Now;
-            Console.WriteLine(currentDateTime);
-            Console.WriteLine(parsedDateTime + "-- Parsed date time");
+            
             string[] nTime = n.Trim().Split(new string[] { "\r\n", "\r", "\n", " " }, StringSplitOptions.None);
             int timeCount = nTime.Count()-2;
             //string time = nTime[timeCount]+nTime.Last();
