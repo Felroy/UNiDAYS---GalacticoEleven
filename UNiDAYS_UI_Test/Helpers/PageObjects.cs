@@ -47,7 +47,6 @@ namespace SpecflowSelenium.Helpers
         {
             string[] nEmail = n.Split("@");
             string emailDomain = "https://" + nEmail[1];
-            Console.WriteLine(emailDomain);
             Assert.True(emailDomain.Equals("https://yopmail.com"));
 
             return emailDomain.ToString();
@@ -58,12 +57,9 @@ namespace SpecflowSelenium.Helpers
             bool isTestValid = false;
             n = n.Replace(",", "");
             DateTime parsedDateTime = DateTime.ParseExact(n, "dddd MMMM dd yyyy h:m:s tt", System.Globalization.CultureInfo.InvariantCulture);
-            //"dddd MMMM dd yyyy hh:mm:ss tt"
             DateTime currentDateTime = DateTime.Now;
             
             string[] nTime = n.Trim().Split(new string[] { "\r\n", "\r", "\n", " " }, StringSplitOptions.None);
-            int timeCount = nTime.Count()-2;
-            //string time = nTime[timeCount]+nTime.Last();
             if ((currentDateTime - parsedDateTime).TotalMinutes < 2)
             {
                 isTestValid = true;

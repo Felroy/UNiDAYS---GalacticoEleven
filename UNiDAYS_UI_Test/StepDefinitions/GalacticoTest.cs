@@ -184,7 +184,6 @@ namespace SpecflowSelenium.StepDefinitions
                 driver.SwitchTo().Frame(driver.FindElement(By.Name("ifmail")));
                 wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[3]/div[4]/span"))).Click();
                 IWebElement emailTime = driver.FindElement(By.XPath("/html/body/header/div[3]/div[4]/span"));
-                string latestEmailTime = emailTime.Text;
                 //Call compareTime from PageObjects to parse and compare time passed between test and NOW
                 Assert.True(PageObjects.compareTime(emailTime.Text) == true);
                 Console.WriteLine(PageObjects.compareTime(emailTime.Text) == true);
