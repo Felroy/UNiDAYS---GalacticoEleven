@@ -5,14 +5,11 @@ using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using SpecflowSelenium.Utils;
 using SpecflowSelenium.Helpers;
-using System.Linq.Expressions;
-using OpenQA.Selenium.Interactions;
-using System.Xml.Linq;
 
 namespace SpecflowSelenium.StepDefinitions
 {
     
-    public class GalacticoTest : IDisposable
+    public class GalacticoTest
     {   
         //Initialize Chromedriver
         public static ChromeDriver driver = new ChromeDriver(@"X:\Visual Studio\UNiDAYS\UNiDAYS_UI_Test\Drivers\chromedriver.exe");
@@ -97,36 +94,39 @@ namespace SpecflowSelenium.StepDefinitions
                 wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@id=\"main\"]/div[1]/ui-view")));
                 IWebElement element = driver.FindElement(By.XPath("//*[@id=\"main\"]/div[1]/ui-view"));
 
-                // Get first league with specified XPath - new league always takes these EXACT same XPaths
-                //=========try catch here
+                // Get first league with specified XPath - new league always takes these EXACT same XPaths               
                 wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"main\"]/div[1]/ui-view/div[1]")));
                 IWebElement newLeague = element.FindElement(By.XPath("//*[@id=\"main\"]/div[1]/ui-view/div[1]"));
-                //catch
+
                 string newLeagueName = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@id=\"main\"]/div[1]/ui-view/div[1]/h5"))).Text;
                 string newLeagueTeam = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@id=\"main\"]/div[1]/ui-view/div[1]/h5/small[2]"))).Text;
                 string newLeagueComp = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@id=\"main\"]/div[1]/ui-view/div[1]/h5/small[1]"))).Text;
                 var test = PageObjects.parseLeagueDetails(newLeagueName, newLeagueTeam, newLeagueComp);
 
-                if (newLeague != null)
+                try
                 {
-                    try
+                    if (newLeague != null)
                     {
-                        Console.WriteLine(leagueDetails.Name + " - " + test.Item1);
-                        Assert.True(leagueDetails.Name.Equals(test.Item1));
+                            Console.WriteLine(leagueDetails.Name + " - " + test.Item1);
+                            Assert.True(leagueDetails.Name.Equals(test.Item1));
 
-                        Console.WriteLine(leagueDetails.Team + " - " + test.Item2);
-                        Assert.True(leagueDetails.Team.Equals(test.Item2));
+                            Console.WriteLine(leagueDetails.Team + " - " + test.Item2);
+                            Assert.True(leagueDetails.Team.Equals(test.Item2));
 
-                        Console.WriteLine(leagueDetails.Competition + " - " + test.Item3);
-                        Assert.True(leagueDetails.Competition.Equals(test.Item3));
+                            Console.WriteLine(leagueDetails.Competition + " - " + test.Item3);
+                            Assert.True(leagueDetails.Competition.Equals(test.Item3)); 
                     }
-                    catch (Exception ex) { Console.WriteLine("Test failed, check console for manual data comparisons - " + ex.Message); }
-                }
-            }
 
+                }
+                catch (Exception ex)
+                { 
+                    Console.WriteLine("Element 'League' null - Check error trace: " + ex.Message);
+                }                
+            }
         }
 
         [Binding]
+        //====================== Scenario: Test email service for password recovery ======================
         public class ForgottenPasswordRecovery
         {
             public WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
@@ -147,17 +147,9 @@ namespace SpecflowSelenium.StepDefinitions
             public void WhenIEnterMyEmailAddress(string username)
             {
                 Console.WriteLine(username);
-
                 IWebElement emailField = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//form[@name='forgotForm']/div/input[@placeholder='Email']")));
-      
                 emailField.Click();
-     
-
-
                 emailField.SendKeys(username);
-                Thread.Sleep(1000);
-                //jse.ExecuteScript("element = document.getElementByClassName('form-control ng-pristine ng-valid ng-empty ng-valid-email ng-touched')");
-                //jse.ExecuteScript("element(0).value'" + username + "'");
             }
 
             [When(@"I click on 'Reset Password'")]
@@ -170,28 +162,27 @@ namespace SpecflowSelenium.StepDefinitions
             [Then(@"I should receive a password recovery email for (.*)")]
             public void ReceiveAPasswordRecoveryEmail(string username)
             {
+                //Switch to new tab, open up yopmail
                 driver.SwitchTo().NewWindow(WindowType.Tab);
                 string emailDomain = PageObjects.parseEmail(username);
                 driver.Navigate().GoToUrl(emailDomain);
                 wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("accept"))).Click();
                 IWebElement emailField = driver.FindElement(By.Id("login"));
                 emailField.SendKeys(username);
-                //Thread.Sleep to give yopmail some time to receive email
+                //Thread.Sleep to give email service some time to receive email
                 Thread.Sleep(7000);
                 IWebElement loginBtn = driver.FindElement(By.XPath("//*[@id=\"refreshbut\"]/button"));
                 loginBtn.Click();
-                //switch iframe here
+                //switch to inbox iframe here
                 driver.SwitchTo().Frame(driver.FindElement(By.Name("ifmail")));
                 wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[3]/div[4]/span"))).Click();
                 IWebElement emailTime = driver.FindElement(By.XPath("/html/body/header/div[3]/div[4]/span"));
                 //Call compareTime from PageObjects to parse and compare time passed between test and NOW
                 Assert.True(PageObjects.compareTime(emailTime.Text) == true);
                 Console.WriteLine(PageObjects.compareTime(emailTime.Text) == true);
+
+                driver.Quit();
             }
-        }
-        public void Dispose()
-        {
-            driver.Dispose();
         }
     }
 }

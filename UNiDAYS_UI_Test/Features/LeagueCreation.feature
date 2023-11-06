@@ -14,10 +14,10 @@ And Verify successful creation of new league
 
 Examples: 
 | username                    | password |
-| felroygalactico@yopmail.com | Test@123 |
+| felroygalactico1@yopmail.com | Test@1234 |
 
 @BonusTestScenario
-Scenario: Logout after League creation and trigger password recovery via email
+Scenario: Test email service for password recovery 
 Given I log out
 And I click on 'Forgotten Password'
 When I enter my email address: <username>
@@ -26,4 +26,4 @@ Then I should receive a password recovery email for <username>
 
 Examples: 
 | username                    | password |
-| felroygalactico@yopmail.com | Test@123 |
+| felroygalactico1@yopmail.com | Test@1234 |

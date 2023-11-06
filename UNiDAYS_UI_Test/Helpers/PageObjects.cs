@@ -1,12 +1,5 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpecflowSelenium.Helpers
 {
@@ -43,6 +36,7 @@ namespace SpecflowSelenium.Helpers
             return new Tuple<string, string, string>(n, t, c);
         }
 
+        //This parser is configured specifically for yopmail's services. Other email domains will need addition to code
         public static string parseEmail(string n)
         {
             string[] nEmail = n.Split("@");
@@ -69,8 +63,6 @@ namespace SpecflowSelenium.Helpers
                 isTestValid = false;
             }
             return isTestValid;
-            //Console.WriteLine(time);
-            //return parsedDateTime;
         }
     }
 
