@@ -1,0 +1,3 @@
+Run server:
+1] Unzip server.zip to current folder (UNiDAYS_API_TEST)
+2] Run 'npm run start-auth' from within folder via CLI

@@ -5,15 +5,16 @@ using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using SpecflowSelenium.Utils;
 using SpecflowSelenium.Helpers;
+using System.Diagnostics;
 
 namespace SpecflowSelenium.StepDefinitions
 {
     
     public class GalacticoTest
-    {   
+    {
         //Initialize Chromedriver
-        public static ChromeDriver driver = new ChromeDriver(@"X:\Visual Studio\UNiDAYS\UNiDAYS_UI_Test\Drivers\chromedriver.exe");
-
+        public static string path = Path.Combine(Directory.GetCurrentDirectory());
+        public static ChromeDriver driver = new ChromeDriver(path);
         public static PageObjects.storeLeagueDetails leagueDetails = new PageObjects.storeLeagueDetails();
 
 
@@ -107,13 +108,13 @@ namespace SpecflowSelenium.StepDefinitions
                 {
                     if (newLeague != null)
                     {
-                            Console.WriteLine(leagueDetails.Name + " - " + test.Item1);
+                            Console.WriteLine("Expected - Actual: " + leagueDetails.Name + " - " + test.Item1);
                             Assert.True(leagueDetails.Name.Equals(test.Item1));
 
-                            Console.WriteLine(leagueDetails.Team + " - " + test.Item2);
+                            Console.WriteLine("Expected - Actual: " + leagueDetails.Team + " - " + test.Item2);
                             Assert.True(leagueDetails.Team.Equals(test.Item2));
 
-                            Console.WriteLine(leagueDetails.Competition + " - " + test.Item3);
+                            Console.WriteLine("Expected - Actual: " + leagueDetails.Competition + " - " + test.Item3);
                             Assert.True(leagueDetails.Competition.Equals(test.Item3)); 
                     }
 

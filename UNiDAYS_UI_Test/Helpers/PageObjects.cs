@@ -28,7 +28,7 @@ namespace SpecflowSelenium.Helpers
         public static Tuple<string, string, string> parseLeagueDetails(string n, string t, string c)
         {           
             string[] nSplit = n.Trim().Split(new string[] { "\r\n", "\r", "\n", " "}, StringSplitOptions.None);
-            Console.WriteLine(nSplit[0]);
+            //Console.WriteLine(nSplit[0]);
             n = nSplit.First();
             t = t.Replace("Team: ", "").Trim();
             c = c.Replace("Competition: ", "").Trim();
