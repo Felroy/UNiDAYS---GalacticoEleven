@@ -1,0 +1,6 @@
+ChromeDriver details:
+Compatible with Chrome Version 119.0.6045.106
+
+Driver Path:
+Located within \UNiDAYS\UNiDAYS_UI_Test\bin\Debug\net6.0
+The code will automatically locate the chromedriver from this folder. If it doesn't, please manually add the chromedriver to this filepath.
